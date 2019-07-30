@@ -97,7 +97,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'reportes'], function() {
     Route::get('reporte/menu/acta', 'ReporteController@acta')->name('reportes.acta');
     Route::get('reporte/acta/{anio}/{periodo}/pdf', 'ReporteController@acta_pdf')->name('reportes.acta_pdf');
     Route::get('reporte/menu/productividad', 'ReporteController@productividad')->name('reportes.productividad');
-    Route::get('reporte/menu/{estado}/{fechai}/{fechaf}/{tipo}/productividad', 'ReporteController@getSolicitudes')->name('reportes.productividad');
+    Route::get('reporte/menu/{estado}/{fechai}/{fechaf}/{tipo}/{documento}/productividad', 'ReporteController@getSolicitudes')->name('reportes.getProductividad');
     Route::get('reporte/menu/por/conductor', 'ReporteController@porconductor')->name('reportes.porconductor');
     Route::get('reporte/{identificacion}/porconductor', 'ReporteController@traer')->name('reportes.traer');
 });

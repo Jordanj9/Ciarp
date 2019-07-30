@@ -92,6 +92,7 @@
                     <div class="col-md-12">
                         {!! Form::open(['route'=>'articulo.calificar','method'=>'POST','class'=>'form-horizontal','files'=>'true'])!!}
                         <div class="col-md-12">
+                            <input type="hidden" name="index" id="index" value="{{$solicitud->tipo}}" />
                             <input type="hidden" name="articulo_id" value="{{$articulo->id}}" />
                             <input type="hidden" name="solicitud_id" value="{{$solicitud->id}}" />
                             <div class="form-group">
@@ -104,12 +105,12 @@
                                 <div class="col-md-4">
                                     <div class="form-line">
                                         <label class="control-label">Puntos Salariales</label>
-                                        {!! Form::number('puntos_ps',null,['class'=>'form-control','placeholder'=>'Puntos salariales a asignar','required']) !!}
+                                        {!! Form::number('puntos_ps',null,['class'=>'form-control','placeholder'=>'Puntos salariales a asignar','required','id'=>'sal']) !!}
                                     </div>
                                 </div><div class="col-md-4">
                                     <div class="form-line">
                                         <label class="control-label">Bonificaciones</label>
-                                        {!! Form::number('puntos_bo',null,['class'=>'form-control','placeholder'=>'Bonificaciones a asignar','required']) !!}
+                                        {!! Form::number('puntos_bo',null,['class'=>'form-control','placeholder'=>'Bonificaciones a asignar','required','id'=>'boni']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -145,6 +146,16 @@
 @endsection
 @section('script')
 <script>
+    $(document).ready(function () {
+        var ind = $("#index").val();
+        if (ind == "ARTICULO INDEXADO") {
+            $("#sal").val(0);
+            $("#sal").attr('disabled', true);
+        } else {
+            $("#boni").val(0);
+            $("#boni").attr('disabled', true);
+        }
+    });
     $(".chosen-select").chosen({});
 </script>
 @endsection

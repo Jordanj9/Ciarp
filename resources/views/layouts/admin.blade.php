@@ -24,6 +24,8 @@
         <link href="{{asset('plugins/pnotify/dist/pnotify.nonblock.css')}}" rel="stylesheet">
         <!-- JQuery Nestable Css -->
         <link href="{{asset('css/plugins/nestable/jquery-nestable.css')}}" rel="stylesheet" />
+        <!-- Animation Css -->
+        <link href="{{asset('css/plugins/animate-css/animate.css')}}" rel="stylesheet" />
         @yield('style')
     </head>
     <body class="theme-teal">
@@ -402,6 +404,10 @@
         <script src="{{ asset('plugins/pnotify/dist/pnotify.js')}}"></script>
         <script src="{{ asset('plugins/pnotify/dist/pnotify.buttons.js')}}"></script>
         <script src="{{ asset('plugins/pnotify/dist/pnotify.nonblock.js')}}"></script>
+        <!-- Waves Effect Plugin Js -->
+        <script src="{{ asset('js/node-waves/waves.js')}}"></script>
+
+
         <script type="text/javascript">
                                 var url = "<?php echo config('app.url'); ?>";
 

@@ -75,8 +75,62 @@ class ReporteController extends Controller {
                         ->with('location', 'reportes');
     }
 
-    public function getSolicitudes($estado, $fi, $ff, $tipo) {
-        dd($fi);
+    public function getSolicitudes($estado, $fi, $ff, $tipo, $documento) {
+        if ($documento != "null") {
+            $docente = Docente::where('numero_documento', $documento)->first();
+            if ($docente != null) {
+                $b = DB::table('solicituds')->whereBetween('created_at', [$fi, $ff])->where('docente_id', $docente->id)->get();
+            } else {
+                return "null";
+            }
+        }
+        $b = DB::table('solicituds')->whereBetween('created_at', [$fi, $ff])->get();
+        $a = null;
+        if ($b != null) {
+            foreach ($b as $value) {
+                if ($estado != "TODO") {
+                    if ($value->estado == $estado) {
+                        if ($tipo != "TODO") {
+                            if ($value->tipo == $tipo) {
+                                $o = Solicitud::find($value->id);
+                                $a[] = $o;
+                            }
+                        } else {
+                            $o = Solicitud::find($value->id);
+                            $a[] = $o;
+                        }
+                    }
+                } else {
+                    if ($tipo != "TODO") {
+                        if ($value->tipo == $tipo) {
+                            $o = Solicitud::find($value->id);
+                            $a[] = $o;
+                        }
+                    } else {
+                        $o = Solicitud::find($value->id);
+                        $a[] = $o;
+                    }
+                }
+            }
+            if ($a != null) {
+                $sol = null;
+                foreach ($a as $item) {
+                    $obj["id"] = $item->id;
+                    $obj["radicado"] = $item->radicado;
+                    $obj["docente"] = $item->docente->primer_nombre . " - " . $item->docente->segundo_nombre . " " . $item->docente->primer_apellido . " " . $item->docente->segundo_apellido;
+                    $obj["titulo"] = $item->titulo;
+                    $obj["tipo"] = $item->tipo;
+                    $obj["estado"] = $item->estado;
+                    $obj["ps"] = $item->puntos_ps;
+                    $obj["bo"] = $item->puntos_bo;
+                    $obj["creado"] = $item->created_at;
+                    $sol[] = $obj;
+                }
+                return json_encode($sol);
+            } else {
+                return "null";
+            }
+        }
     }
 
 }

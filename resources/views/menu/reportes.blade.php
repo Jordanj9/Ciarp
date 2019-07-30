@@ -26,8 +26,8 @@
                     </a>  
                     @endif
                     @if(session()->exists('PAG_PAGINAS'))
-                    <a href="{{route('pagina.index')}}" class="btn bg-light-green waves-effect">
-                        <div><span>PRODUCTIVIDAD POR RANGO DE FECHA</span><span class="ink animate"></span></div>
+                    <a href="{{route('reportes.productividad')}}" class="btn bg-light-green waves-effect">
+                        <div><span>PRODUCTIVIDAD</span><span class="ink animate"></span></div>
                     </a>  
                     @endif
                     @if(session()->exists('PAG_GRUPOS-ROLES'))
