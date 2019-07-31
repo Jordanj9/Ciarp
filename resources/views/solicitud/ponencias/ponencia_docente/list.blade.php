@@ -39,7 +39,6 @@
                                 <th>Tipo de Evento</th>
                                 <th>Estado</th>
                                 <th>Puntos de Bonificaciones</th>
-                                <th>Acta</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -63,7 +62,6 @@
                                     @endif
                                 </td>
                                 <td>{{$d->solicitud->puntos_bo}}</td>
-                                <td><a target="_blank" href="{{asset('docs/ponencia/acta/'.$d->solicitud->acta)}}">{{$d->solicitud->acta}}</a></td>
                                 <td>
                                     @if($d->solicitud->estado == 'EN ESPERA')
                                     <a href="{{ route('ponencia.edit',$d->id)}}" class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Solicitud"><i class="material-icons">mode_edit</i></a>

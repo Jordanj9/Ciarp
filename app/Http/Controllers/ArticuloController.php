@@ -584,15 +584,6 @@ class ArticuloController extends Controller {
         $solicitud->puntos_ps = $request->puntos_ps;
         $solicitud->puntos_bo = $request->puntos_bo;
         $solicitud->fecha = $hoy["year"] . "-" . $hoy["mon"] . "-" . $hoy["mday"];
-        if (isset($request->acta)) {
-            $file = $request->file("acta");
-            $name = "Acta_" . $hoy["year"] . $hoy["mon"] . $hoy["mday"] . $hoy["hours"] . $hoy["minutes"] . $hoy["seconds"] . "." . $file->getClientOriginalExtension();
-            $path = public_path() . "/docs/articulos/acta/";
-            $file->move($path, $name);
-            $solicitud->acta = $name;
-        } else {
-            $solicitud->acta = "NO";
-        }
         $result = $solicitud->save();
         if ($result) {
             $u = Auth::user();

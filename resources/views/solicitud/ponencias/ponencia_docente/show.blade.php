@@ -153,10 +153,6 @@
                                     <td class="subject">{{$solicitud->puntos_bo}}</td>
                                 </tr>
                                 <tr class="read">
-                                    <td class="contact"><b>Acta</b></td>
-                                    <td><a target="_blank" href="{{asset('docs/ponencia/acta/'.$solicitud->acta)}}">{{$solicitud->acta}}</a></td>
-                                </tr>
-                                <tr class="read">
                                     <td class="contact"><b>Creado</b></td>
                                     <td class="subject">{{$ponencia->created_at}}</td>
                                 </tr>

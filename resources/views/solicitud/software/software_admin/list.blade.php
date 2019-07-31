@@ -13,13 +13,13 @@
             <div class="header">
                 <h2>
                     GESTIÓN DE SOFTWARE<small>Haga clic en el botón de 3 puntos de la derecha de este título para agregar un nuevo registro.</small>
-               </h2>
+                </h2>
             </div>
             <div class="body">
                 <div class="alert bg-green alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                     <strong>Detalles: </strong>Gestione la productividad académica de tipo Software</div>
-                  <div class="table-responsive">
+                <div class="table-responsive">
                     <table id="tabla" class="table table-bordered table-striped table-hover table-responsive table-condensed" width="100%" cellspacing="0">
                         <thead>
                             <tr>
@@ -30,7 +30,6 @@
                                 <th>Titular</th>
                                 <th>Estado</th>
                                 <th>Puntos Salariales</th>
-                                <th>Acta</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -54,7 +53,6 @@
                                     @endif
                                 </td>
                                 <td>{{$d->solicitud->puntos_ps}}</td>
-                                <td><a target="_blank" href="{{asset('docs/software/acta/'.$d->solicitud->acta)}}">{{$d->solicitud->acta}}</a></td>
                                 <td>
                                     <a href="{{ route('software.evaluar',$d->id)}}" class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip" data-placement="top" title="Evaluar Solicitud"><i class="material-icons">check_circle</i></a>
                                     <a href="{{ route('software.show',$d->id)}}" class="btn bg-green waves-effect btn-xs" data-toggle="tooltip" data-placement="top" title="Ver Solicitud"><i class="material-icons">remove_red_eye</i></a>

@@ -113,14 +113,6 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-4">
-                                    <div class="form-line">
-                                        <label class="control-label">Acta</label>
-                                        <input class="form-control" type="file" required="required" name="acta">    
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <br/><br/><a href="{{route('libro.indexadmin')}}" class="btn bg-red waves-effect">Cancelar</a>
                                 <button class="btn bg-indigo waves-effect" type="reset">Limpiar Formulario</button>
                                 {!! Form::submit('Guardar',['class'=>'btn bg-green waves-effect']) !!}

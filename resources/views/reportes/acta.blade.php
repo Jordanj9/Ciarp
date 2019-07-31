@@ -125,17 +125,25 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <div class="col-md-3"></div>
-                                <div class="col-md-6">
-                                    <div class="form-group" style="text-align: center; margin-top: 35px;">
-                                        <h4>Genere Reporte En PDF</h4>
-                                        <a onclick="pdf()" class="btn btn-circle ripple-infinite btn-lg btn-danger"><div><span class="material-icons">picture_as_pdf</span></div></a>
-                                    </div>
-                                </div>
-                                <div class="col-md-3"></div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <button onclick="pdf()" class="btn btn-success icon-btn " ><i class="material-icons">search</i>Consultar</button>      
                             </div>
+                        </div>
+                        <div class="table-responsive" style="margin-top: 180px">
+                            <table id="tabla" class="table table-bordered table-striped table-hover table-responsive table-condensed" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Número</th>
+                                        <th>Docente</th>
+                                        <th>Fundamento</th>
+                                        <th>Puntos</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tb2">
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -147,8 +155,42 @@
 @section('script')
 <script>
     $(".chosen-select").chosen({});
-
+    $(document).ready(function () {
+        $('#tabla').DataTable();
+    });
     function pdf() {
+        $("#tb2").html("");
+        var u = $("#anio").val();
+        var p = $("#periodo").val();
+        if (u == null || p == null) {
+            notify('Alerta', 'Debe indicar todos los parámetros para continuar', 'warning');
+        }
+        if (u > 1990 && u < 2070) {
+            $.ajax({
+                type: 'GET',
+                url: url + "reportes/reporte/acta/" + u + "/" + p + "/pdf",
+                data: {},
+            }).done(function (msg) {
+                if (msg !== "null") {
+                    var m = JSON.parse(msg);
+                    var html = "";
+                    $.each(m, function (index, item) {
+                        html = html + "<tr><td>" + item.num + "</td>";
+                        html = html + "<td>" + item.docente + "</td>";
+                        html = html + "<td>" + item.fundamento + "</td>";
+                        html = html + "<td>" + item.puntos + "</td>";
+                        +"</tr>";
+                    });
+                    $("#tb2").html(html);
+                } else {
+                    notify('Atención', 'No hay solicitudes para los parametros seleccionados', 'error');
+                }
+            });
+        } else {
+            notify('Alerta', 'El valor del campo año no es valido.', 'warning');
+        }
+    }
+    function pdfviejo() {
         var u = $("#anio").val();
         var p = $("#periodo").val();
         if (u == null || p == null) {

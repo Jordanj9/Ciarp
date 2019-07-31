@@ -38,7 +38,6 @@
                                 <th>Titular</th>
                                 <th>Estado</th>
                                 <th>Puntos Salariales</th>
-                                <th>Acta</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -60,7 +59,6 @@
                                     @endif
                                 </td>
                                 <td>{{$d->solicitud->puntos_ps}}</td>
-                                <td><a target="_blank" href="{{asset('docs/actas/'.$d->acta)}}">{{$d->acta}}</a></td>
                                 <td>
                                     @if($d->solicitud->estado == 'EN ESPERA')
                                     <a href="{{ route('software.edit',$d->id)}}" class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip" data-placement="top" title="Editar Solicitud"><i class="material-icons">mode_edit</i></a>

@@ -162,10 +162,6 @@
                                     <td class="subject">{{$solicitud->puntos_bo}}</td>
                                 </tr>
                                 <tr class="read">
-                                    <td class="contact"><b>Acta</b></td>
-                                    <td><a target="_blank" href="{{asset('docs/articulos/acta/'.$solicitud->acta)}}">{{$solicitud->acta}}</a></td>
-                                </tr>
-                                <tr class="read">
                                     <td class="contact"><b>Observación</b></td>
                                     <td class="subject">{{$solicitud->observacion}}</td>
                                 </tr>

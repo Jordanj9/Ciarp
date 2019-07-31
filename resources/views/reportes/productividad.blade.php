@@ -79,7 +79,6 @@
                                 <th>Puntos Salariales</th>
                                 <th>Bonificaciones</th>
                                 <th>Creado</th>
-                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="tb2">
@@ -110,7 +109,7 @@
             </div>
             <div class="body">
                 <canvas id="line_chart" height="150"></canvas>
-                </div>
+            </div>
         </div>
     </div>
     <!-- #END# Line Chart -->
@@ -126,30 +125,30 @@
 
                             $(document).ready(function () {
                                 $('#tabla').DataTable();
-                                
+
                             });
                             $(".chosen-select").chosen({});
 
 
-                            function getChartJs(type, datos) {
+                            function getChartJs(type, meses, ps, bo) {
                                 var config = null;
 
                                 if (type === 'line') {
                                     config = {
                                         type: 'line',
                                         data: {
-                                            labels: ["January", "February", "March", "April", "May", "June", "July"],
+                                            labels: meses,
                                             datasets: [{
-                                                    label: "My First dataset",
-                                                    data: [65, 59, 80, 81, 56, 55, 40],
+                                                    label: "Puntos Salariales Asignados",
+                                                    data: ps,
                                                     borderColor: 'rgba(0, 188, 212, 0.75)',
                                                     backgroundColor: 'rgba(0, 188, 212, 0.3)',
                                                     pointBorderColor: 'rgba(0, 188, 212, 0)',
                                                     pointBackgroundColor: 'rgba(0, 188, 212, 0.9)',
                                                     pointBorderWidth: 1
                                                 }, {
-                                                    label: "My Second dataset",
-                                                    data: [28, 48, 40, 19, 86, 27, 90],
+                                                    label: "Bonificaciones Asignadas",
+                                                    data: bo,
                                                     borderColor: 'rgba(233, 30, 99, 0.75)',
                                                     backgroundColor: 'rgba(233, 30, 99, 0.3)',
                                                     pointBorderColor: 'rgba(233, 30, 99, 0)',
@@ -253,18 +252,16 @@
                                 if (doc.length <= 0) {
                                     doc = "null";
                                 }
-                                console.log(doc);
                                 $.ajax({
                                     type: 'GET',
                                     url: url + "reportes/reporte/menu/" + esta + "/" + fi + "/" + ff + "/" + ti + "/" + doc + "/productividad",
                                     data: {},
                                 }).done(function (msg) {
                                     if (msg !== "null") {
-                                        
-                                new Chart(document.getElementById("line_chart").getContext("2d"), getChartJs('line',datos));
                                         var m = JSON.parse(msg);
+                                        new Chart(document.getElementById("line_chart").getContext("2d"), getChartJs('line', m.meses, m.ps, m.bo));
                                         var html = "";
-                                        $.each(m, function (index, item) {
+                                        $.each(m.data, function (index, item) {
                                             html = html + "<tr><td>" + item.radicado + "</td>";
                                             html = html + "<td>" + item.docente + "</td>";
                                             html = html + "<td>" + item.titulo + "</td>";

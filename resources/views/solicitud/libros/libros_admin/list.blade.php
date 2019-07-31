@@ -30,7 +30,6 @@
                                 <th>Tipo de Producto</th>
                                 <th>Estado</th>
                                 <th>Puntos Salariales</th>
-                                <th>Acta</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -58,11 +57,9 @@
                                     @endif
                                 </td>
                                 <td>{{$d->solicitud->puntos_ps}}</td>
-                                <td><a target="_blank" href="{{asset('docs/libro/acta/'.$d->solicitud->acta)}}">{{$d->solicitud->acta}}</a></td>
                                 <td>
                                     <a href="{{ route('libro.evaluar',$d->id)}}" class="btn bg-indigo waves-effect btn-xs" data-toggle="tooltip" data-placement="top" title="Evaluar Solicitud"><i class="material-icons">check_circle</i></a>
-                                    <a href="{{ route('libro.show',$d->id)}}" class="btn bg-green waves-effect btn-xs" data-toggle="tooltip" data-placement="top" title="Ver Solicitud"><i class="material-icons">remove_red_eye</i></a>
-                                    <a href="{{ route('pqr.show',$d->solicitud_id)}}" class="btn bg-teal waves-effect btn-xs" data-toggle="tooltip" data-placement="top" title="Nuevo PQR"><i class="material-icons">forum</i></a>  
+                                    <a href="{{ route('libro.show',$d->id)}}" class="btn bg-green waves-effect btn-xs" data-toggle="tooltip" data-placement="top" title="Ver Solicitud"><i class="material-icons">remove_red_eye</i></a>  
                                 </td>
                             </tr>
                             @endforeach

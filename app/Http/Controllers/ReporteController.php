@@ -63,7 +63,6 @@ class ReporteController extends Controller {
                 $obj["puntos"] = $puntos;
                 $sol[] = $obj;
             }
-            dd($sol);
             return json_encode($sol);
         } else {
             return "null";
@@ -112,6 +111,37 @@ class ReporteController extends Controller {
                     }
                 }
             }
+            $start = strtotime($fi);
+            $end = strtotime($ff);
+            $total = null;
+            while ($start < $end) {
+                $to = [
+                    'ps' => 0,
+                    'bo' => 0
+                ];
+                $ps = $bo = 0;
+                foreach ($a as $i) {
+                    $l = date("Y-m-d", $start);
+                    $c = explode("-", $l);
+                    $k = explode("-", $i->fecha);
+                    if ($i->fecha != null) {
+                        if ($k[1] == $c[1]) {
+                            $to["ps"] = $to["ps"] + $i->puntos_ps;
+                            $to["bo"] = $to["bo"] + $i->puntos_bo;
+                        }
+                    }
+                }
+                $total[$l] = $to;
+                $m[] = strftime('%b %Y', $start);
+                $start = strtotime("+1 month", $start);
+            }
+            if ($total != null) {
+                $puntos_ps = $puntos_bo = null;
+                foreach ($total as $key => $value) {
+                    $puntos_ps[] = $value["ps"];
+                    $puntos_bo[] = $value["bo"];
+                }
+            }
             if ($a != null) {
                 $sol = null;
                 foreach ($a as $item) {
@@ -124,8 +154,11 @@ class ReporteController extends Controller {
                     $obj["ps"] = $item->puntos_ps;
                     $obj["bo"] = $item->puntos_bo;
                     $obj["creado"] = $item->created_at;
-                    $sol[] = $obj;
+                    $sol['data'][] = $obj;
                 }
+                $sol["meses"] = $m;
+                $sol["ps"] = $puntos_ps;
+                $sol["bo"] = $puntos_bo;
                 return json_encode($sol);
             } else {
                 return "null";
